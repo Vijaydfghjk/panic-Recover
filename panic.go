@@ -17,7 +17,7 @@ func convertToInt(value interface{}) int {
 		return v
 	}
 	panic(fmt.Sprintf("Expected an integer, but got: %v", value))
-	//panic(fmt.Printf("Expected an integer, but got: %v", value))
+	//panic(fmt.Printf("Expected an integer, but got: %v", value)) returning two value we can't use
 }
 
 func main() {
@@ -28,6 +28,6 @@ func main() {
 		}
 	}()
 
-	demo(convertToInt("vj"))
+	demo(convertToInt("vj")) // first inner function will be execute
 
 }
