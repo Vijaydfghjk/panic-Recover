@@ -1,0 +1,30 @@
+package main
+
+import "fmt"
+
+func Demo(arr []int, b int) {
+
+	defer func() {
+
+		if r := recover(); r != nil {
+
+			fmt.Println("Error message is ", r)
+		}
+
+	}()
+
+	if len(arr) < b {
+
+		panic(fmt.Sprintf("%d is more that length of array", b))
+	}
+
+	arr = append(arr[:b-1], arr[b:]...)
+
+	fmt.Println(arr)
+}
+func main() {
+
+	arr := []int{1, 2, 3, 4, 5}
+	Demo(arr, 7)
+
+}
