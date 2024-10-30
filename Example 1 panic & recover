@@ -1,0 +1,63 @@
+// You can edit this code!
+// Click here and start typing.
+
+/*
+
+1.Defer is used to schedule cleanup or recovery actions.
+2.When a Panic occurs, normal execution is halted, and deferred functions are called.
+3.Inside a deferred function, Recover can be used to catch the panic and handle it without crashing the program.
+
+*/
+package main
+
+import "fmt"
+
+type Data struct {
+	Birth   map[string]int
+	persons [4]string
+}
+
+func (a *Data) init(value map[string]int) {
+
+	a.Birth = make(map[string]int)
+
+	a.Birth = value
+	fmt.Println(a)
+
+}
+func (a *Data) getplace() {
+
+	i := 0
+	for key, _ := range a.Birth {
+
+		if i < len(a.persons) {
+			a.persons[i] = key
+			i++
+		} else {
+			panic(fmt.Sprintf("%v is more that length of array", key))
+		}
+
+	}
+	fmt.Println(a.persons)
+}
+
+func main() {
+
+	defer func() {
+		if r := recover(); r != nil {
+
+			fmt.Println("Invalid :", r)
+		}
+	}()
+	var vj Data
+	test1 := map[string]int{
+		"Chennai":    1999,
+		"madurai":    2000,
+		"bangalore":  2000,
+		"Panruri":    1999,
+		"kumbakonam": 2003,
+	}
+	vj.init(test1)
+	vj.getplace()
+
+}
